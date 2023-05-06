@@ -52,7 +52,7 @@ The Do method takes an http.Request object as input and returns an http.Response
 
 Additionally, the NewMockedRestClient function creates a new instance of MockRestClient for easy instantiation in tests.
 
-In summary, the MockRestClient enables you to create a simulated HTTP client, facilitating controlled testing of code that interacts with HTTP clients. It helps isolate and verify specific behaviors without relying on actual network communication, making unit and integration testing more straightforward.
+In summary, the MockRestClient enables you to create a simulated HTTP client, facilitating controlled testing of code that interacts with HTTP clients. It helps isolate and verify specific behaviors without relying on actual network communication, making unit testing more straightforward.
 
 Example test: 
 
