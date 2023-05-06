@@ -41,3 +41,41 @@ func main() {
   
 }
 ```
+
+##Testing
+
+The provided code defines a MockRestClient struct, which serves as a simulated HTTP client for testing purposes. It allows you to mimic the behavior of a real HTTP client without making actual network requests.
+
+The MockRestClient implements the Do method from the HTTPClient interface. It utilizes the github.com/stretchr/testify/mock package to extend the mock.Mock struct and set expectations for its behavior.
+
+The Do method takes an http.Request object as input and returns an http.Response and an error. By using the Called, args.Get, and args.Error methods of the mock.Mock struct, the method records the call and retrieves the mocked response and error values specified during test setup.
+
+Additionally, the NewMockedRestClient function creates a new instance of MockRestClient for easy instantiation in tests.
+
+In summary, the MockRestClient enables you to create a simulated HTTP client, facilitating controlled testing of code that interacts with HTTP clients. It helps isolate and verify specific behaviors without relying on actual network communication, making unit and integration testing more straightforward.
+
+Example test: 
+
+```go
+func TestClient_GET_OK(t *testing.T) {
+	mockClient := NewMockedRestClient()
+	client := NewClient("http://example.com", nil, mockClient)
+
+	expectedURL := "http://example.com/endpoint"
+	expectedResponse := &http.Response{
+		StatusCode: http.StatusOK,
+		Body:       ioutil.NopCloser(bytes.NewBufferString(`{"field1":"value1","field2":2}`)),
+	}
+	mockClient.On("Do", mock.Anything).Return(expectedResponse, nil)
+
+	response := &ResponseStruct{}
+	err := client.Get(context.Background(), "/endpoint", response)
+
+	actualRequest := mockClient.Calls[0].Arguments.Get(0).(*http.Request)
+	assert.NoError(t, err)
+	assert.Equal(t, "GET", actualRequest.Method)
+	assert.Equal(t, expectedURL, actualRequest.URL.String())
+	assert.Equal(t, response.Field1, "value1")
+	assert.Equal(t, response.Field2, 2)
+}
+```
