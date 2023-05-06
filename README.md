@@ -1,5 +1,5 @@
 <div align="center">
- <h1>Disposable Mail Api for go</h1>
+ <h1The rest-client package for Go</h1>
 </div>
 
 The rest-client package provides a client implementation for making HTTP requests to RESTful APIs. It offers a convenient and straightforward way to interact with REST endpoints by encapsulating the underlying HTTP communication details.
