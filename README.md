@@ -9,3 +9,35 @@ The package includes a Client struct that allows you to configure the base URL, 
 The Client struct uses an interface, HTTPClient, to abstract the HTTP client implementation, allowing you to easily swap different implementations, such as a real HTTP client or a mock client, for testing purposes.
 
 By utilizing the rest-client package, you can simplify the process of sending HTTP requests to RESTful APIs, handle responses, and manage common functionality like setting headers or handling errors.
+
+
+## Installation
+```bash
+go get github.com/bypepe77/rest-client-go
+```
+
+### Usage
+
+```go
+import disposable "github.com/bypepe77/disposable-mail-api/pkg"
+
+type Response struct {
+	Field1 string `json:"field1"`
+	Field2 int    `json:"field2"`
+}
+
+func main() {
+	headers := map[string]string{
+		"Content-Type":  "application/json",
+		"Authorization": fmt.Sprintf("Bearer %v", "ApiKey"),
+	}
+	restClient := rest.NewClient("http://example.com", headers, nil)
+
+	response := &Response{}
+	restClient.Get(context.Background(), "/endpoint", response)
+
+	fmt.Println(response.Field1)
+}
+  
+}
+```
