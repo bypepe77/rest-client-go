@@ -19,7 +19,7 @@ go get github.com/bypepe77/rest-client-go
 ### Usage
 
 ```go
-import disposable "github.com/bypepe77/disposable-mail-api/pkg"
+import "github.com/bypepe77/rest-client-go"
 
 type Response struct {
 	Field1 string `json:"field1"`
