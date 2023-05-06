@@ -42,7 +42,7 @@ func main() {
 }
 ```
 
-##Testing
+## Testing
 
 The provided code defines a MockRestClient struct, which serves as a simulated HTTP client for testing purposes. It allows you to mimic the behavior of a real HTTP client without making actual network requests.
 
